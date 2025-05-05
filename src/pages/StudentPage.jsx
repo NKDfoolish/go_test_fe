@@ -12,11 +12,6 @@ const StudentPage = () => {
 
     return (
         <div className="student-page">
-            <div className="student-page-header">
-                <h2>Student Information</h2>
-                <p>Search for a student by registration number</p>
-            </div>
-
             <div className="student-container">
                 <div className="search-section">
                     <h3>Find Student</h3>
