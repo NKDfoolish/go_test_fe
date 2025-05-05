@@ -1,0 +1,91 @@
+.student-details {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    background-color: white;
+}
+
+.student-details h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #2d3748;
+}
+
+.student-details h3 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: #4a5568;
+}
+
+.student-details ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.student-details li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.student-details li:last-child {
+    border-bottom: none;
+}
+
+.student-details-placeholder,
+.student-details-loading,
+.student-details-error,
+.student-details-not-found {
+    padding: 20px;
+    border-radius: 4px;
+    margin-top: 15px;
+    text-align: center;
+    background-color: #f8fafc;
+}
+
+.student-details-placeholder {
+    color: #64748b;
+    border: 1px dashed #cbd5e1;
+}
+
+.student-details-loading {
+    color: #3b82f6;
+    background-color: #eff6ff;
+}
+
+.student-details-error {
+    color: #ef4444;
+    background-color: #fee2e2;
+}
+
+.student-details-not-found {
+    color: #f59e0b;
+    background-color: #fef3c7;
+}
+
+.student-details {
+    margin-top: 15px;
+}
+
+.scores-table {
+    margin-top: 10px;
+    overflow-x: auto;
+}
+
+.scores-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.scores-table th,
+.scores-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.scores-table th {
+    background-color: #f1f5f9;
+    font-weight: 500;
+}

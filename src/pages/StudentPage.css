@@ -1,0 +1,64 @@
+.student-page {
+    padding: 0;
+}
+
+.student-page-header {
+    margin-bottom: 24px;
+}
+
+.student-page-header h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    color: #1e293b;
+}
+
+.student-page-header p {
+    margin: 8px 0 0;
+    color: #64748b;
+}
+
+.student-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+}
+
+.search-section {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.search-section h3 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    color: #334155;
+}
+
+.details-section {
+    min-height: 300px;
+}
+
+.instructions {
+    background-color: #f8fafc;
+    border-radius: 8px;
+    padding: 24px;
+    color: #64748b;
+}
+
+.instructions h3 {
+    color: #334155;
+    margin-top: 0;
+}
+
+.instructions p {
+    margin-bottom: 16px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .student-container {
+        padding: 16px;
+    }
+}
