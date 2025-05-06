@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8080/api/scores'; // Replace with your actual backend URL
+const API_BASE_URL = 'https://scores-service-latest.onrender.com/api/scores'; // Replace with your actual backend URL
 
 export const getStudentByRegistrationNumber = async (registrationNumber) => {
     try {
