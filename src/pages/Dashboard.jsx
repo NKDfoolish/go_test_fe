@@ -8,20 +8,18 @@ import { useData } from '../context/DataContext';
 import './Dashboard.css';
 
 const Dashboard = () => {
-    const { topStudents, subjectStatistics, isLoading, error } = useData();
+    const { 
+        topStudents, 
+        subjectStatistics, 
+        loadingStudents, 
+        loadingStatistics, 
+        error 
+    } = useData();
     const [searchedRegistrationNumber, setSearchedRegistrationNumber] = useState(null);
 
     const handleStudentSearch = (registrationNumber) => {
         setSearchedRegistrationNumber(registrationNumber);
     };
-
-    if (isLoading) {
-        return <div className="loading">Loading dashboard data...</div>;
-    }
-
-    if (error) {
-        return <div className="error">{error}</div>;
-    }
 
     return (
         <div className="dashboard">
@@ -34,17 +32,33 @@ const Dashboard = () => {
                 
                 <div className="card">
                     <h3>Top 10 Group A Students</h3>
-                    <TopStudentsTable students={topStudents} />
+                    {loadingStudents ? (
+                        <div className="card-loading">Loading top students...</div>
+                    ) : error ? (
+                        <div className="card-error">{error}</div>
+                    ) : (
+                        <TopStudentsTable students={topStudents} />
+                    )}
                 </div>
                 
                 <div className="card full-width">
                     <h3>Subjects Statistics</h3>
-                    <AllSubjectsChart statistics={subjectStatistics} />
+                    {loadingStatistics ? (
+                        <div className="card-loading">Loading statistics data...</div>
+                    ) : error ? (
+                        <div className="card-error">{error}</div>
+                    ) : (
+                        <AllSubjectsChart statistics={subjectStatistics} />
+                    )}
                 </div>
                 
                 <div className="card">
                     <h3>Subject Details</h3>
-                    <SubjectStatistics />
+                    {loadingStatistics ? (
+                        <div className="card-loading">Loading subject details...</div>
+                    ) : (
+                        <SubjectStatistics />
+                    )}
                 </div>
             </div>
         </div>

@@ -8,48 +8,74 @@ export const useData = () => useContext(DataContext);
 export const DataProvider = ({ children }) => {
   const [topStudents, setTopStudents] = useState([]);
   const [subjectStatistics, setSubjectStatistics] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  
+  // Individual loading states for different data types
+  const [loadingStudents, setLoadingStudents] = useState(true);
+  const [loadingStatistics, setLoadingStatistics] = useState(true);
+  
   const [error, setError] = useState(null);
-  const [dataFetched, setDataFetched] = useState(false);
 
   useEffect(() => {
-    // Only fetch if we haven't already
-    if (!dataFetched) {
-      const fetchData = async () => {
-        try {
-          setIsLoading(true);
-          const [topStudentsData, subjectStatisticsData] = await Promise.all([
-            getTop10GroupA(),
-            getAllSubjectsScoreStatistics()
-          ]);
-          
-          setTopStudents(topStudentsData);
-          setSubjectStatistics(subjectStatisticsData);
-          setDataFetched(true);
-        } catch (err) {
-          console.error('Error fetching data:', err);
-          setError('Failed to load application data');
-        } finally {
-          setIsLoading(false);
-        }
-      };
+    // Fetch top students data
+    const fetchTopStudents = async () => {
+      try {
+        setLoadingStudents(true);
+        const data = await getTop10GroupA();
+        setTopStudents(data);
+      } catch (err) {
+        console.error('Error fetching top students:', err);
+        setError('Failed to load top students data');
+      } finally {
+        setLoadingStudents(false);
+      }
+    };
 
-      fetchData();
-    }
-  }, [dataFetched]);
+    // Fetch subject statistics data
+    const fetchSubjectStatistics = async () => {
+      try {
+        setLoadingStatistics(true);
+        const data = await getAllSubjectsScoreStatistics();
+        setSubjectStatistics(data);
+      } catch (err) {
+        console.error('Error fetching subject statistics:', err);
+        setError('Failed to load statistics data');
+      } finally {
+        setLoadingStatistics(false);
+      }
+    };
 
-  // Function to manually refresh data if needed
-  const refreshData = () => {
-    setDataFetched(false);
-  };
+    // Start both fetches in parallel
+    fetchTopStudents();
+    fetchSubjectStatistics();
+  }, []);
+
+  // Check if any data is still loading
+  const isAnyLoading = loadingStudents || loadingStatistics;
 
   return (
     <DataContext.Provider value={{ 
       topStudents, 
       subjectStatistics, 
-      isLoading, 
+      loadingStudents,
+      loadingStatistics,
+      isAnyLoading,
       error,
-      refreshData
+      refreshTopStudents: () => {
+        setLoadingStudents(true);
+        setTopStudents([]);
+        getTop10GroupA()
+          .then(data => setTopStudents(data))
+          .catch(err => setError('Failed to refresh top students'))
+          .finally(() => setLoadingStudents(false));
+      },
+      refreshStatistics: () => {
+        setLoadingStatistics(true);
+        setSubjectStatistics([]);
+        getAllSubjectsScoreStatistics()
+          .then(data => setSubjectStatistics(data))
+          .catch(err => setError('Failed to refresh statistics'))
+          .finally(() => setLoadingStatistics(false));
+      }
     }}>
       {children}
     </DataContext.Provider>
